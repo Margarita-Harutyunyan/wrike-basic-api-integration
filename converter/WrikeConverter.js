@@ -28,7 +28,7 @@ class WrikeConverter extends TaskConverter {
     }
 
     getUpdatedAt() {
-        return this.task.updateDate || '';
+        return this.task.updatedDate || '';
     }
 
     getTicketURL() {
