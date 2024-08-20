@@ -4,7 +4,7 @@ const fs = require('fs');
 const WrikeConverter = require('./converter/WrikeConverter');
 
 const token = process.env.WRIKE_API_TOKEN;
-const url = 'https://www.wrike.com/api/v4/tasks';
+const url = 'https://www.wrike.com/api/v4/tasks?fields=["parentIds"]';
 
 
 axios.get(url, {
