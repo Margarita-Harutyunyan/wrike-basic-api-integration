@@ -2,8 +2,6 @@ const TaskConverter = require('./TaskConverter');
 
 class WrikeConverter extends TaskConverter {
     getId() {
-        // console.log('entered get id');
-        // console.log('this.task = ', this.task); // undefined
         return this.task.id || '';
     }
 

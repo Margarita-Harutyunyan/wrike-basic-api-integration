@@ -46,11 +46,7 @@ class TaskConverter {
   
     // Method to convert task to the unified format
     convert(task) {
-        // console.log('entered convert');
-        // console.log('task =', task);
         this.init(task);
-        // console.log('this.task = ', this.task)
-        // console.log('\n')
 
         this.result = {
             id: this.getId(),
