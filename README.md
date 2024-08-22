@@ -46,7 +46,6 @@ This project is a simple Node.js application that fetches all tasks from Wrike f
 1. **Run the Application:**
     ```
     node main.js
-    
-     ```
+    ```
 2. **Output:**
 - Check the results in a newly generated file, `tasks.json`.
