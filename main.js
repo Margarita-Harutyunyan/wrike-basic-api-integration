@@ -1,24 +1,25 @@
-require('dotenv').config();
+const WrikeConverter = require('./converter/WrikeConverter');
 const axios = require('axios');
 const fs = require('fs');
-const WrikeConverter = require('./converter/WrikeConverter');
+require('dotenv').config();
 
-const token = process.env.WRIKE_API_TOKEN;
-const url = 'https://www.wrike.com/api/v4/tasks?fields=["parentIds"]';
+async function fetchAndConvertTasks() {
+  const token = process.env.WRIKE_API_TOKEN;
+  const url = 'https://www.wrike.com/api/v4/tasks?fields=["parentIds"]';
 
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
 
-axios.get(url, {
-  headers: {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json'
-  }
-})
-  .then(response => {
     const converter = new WrikeConverter();
-    let tasks = [];
+    const tasks = [];
 
-    for (let obj of response.data.data) {
-      let task = converter.convert(obj);
+    for (const obj of response.data.data) {
+      const task = converter.convert(obj);
       tasks.push(task);
     }
 
@@ -31,7 +32,13 @@ axios.get(url, {
         console.log('Successfully wrote to file');
       }
     });
-  })
-  .catch(error => {
+  } catch (error) {
     console.error('There was an error with the axios request:', error);
-  });
+  }
+}
+
+if (require.main === module) {
+  fetchAndConvertTasks();
+}
+
+module.exports = { fetchAndConvertTasks };
