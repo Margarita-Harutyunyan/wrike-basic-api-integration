@@ -18,7 +18,7 @@ class WrikeConverter extends TaskConverter {
     }
 
     getCollections() {
-        return this.task.parentIds || '';
+        return this.task.parentIds || [];
     }
 
     getCreatedAt() {
