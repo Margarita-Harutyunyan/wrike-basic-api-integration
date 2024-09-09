@@ -1,7 +1,7 @@
 const WrikeConverter = require('../converter/WrikeConverter');
 const axios = require('axios');
 const fs = require('fs');
-const { fetchAndConvertTasks } = require('../main');
+const { fetchAndConvertTasks } = require('../dist/main');
 
 jest.mock('axios');
 jest.mock('fs');
