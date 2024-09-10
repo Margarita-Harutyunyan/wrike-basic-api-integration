@@ -9,7 +9,7 @@ export interface WrikeTask {
     permalink: string;
 };
 
-export interface TaskResult {
+export interface ResultTask {
     id: string;
     name: string;
     assignee: string;
@@ -21,9 +21,14 @@ export interface TaskResult {
 };
 
 export interface TaskConverter {
-    (task: WrikeTask): TaskResult;
+    (task: WrikeTask): ResultTask;
 };
 
-export interface Project {
-    id: string
+export interface WrikeProject {
+    id: string;
+};
+
+export interface ResultProject {
+    id: string;
+    tasks: ResultTask[];
 };

@@ -1,6 +1,6 @@
-import { WrikeTask, TaskResult, TaskConverter } from '../interfaces';
+import { WrikeTask, ResultTask, TaskConverter } from '../interfaces';
 
-export const wrikeConverter: TaskConverter = (task: WrikeTask): TaskResult => {
+export const wrikeConverter: TaskConverter = (task: WrikeTask): ResultTask => {
     return {
         id: task.id,
         name: task.title,
