@@ -4,8 +4,8 @@ export const wrikeConverter: TaskConverter = (task: WrikeTask): ResultTask => {
     return {
         id: task.id,
         name: task.title,
-        assignee: task.accountId,
-        status: task.importance,
+        assignees: task.responsibleIds,
+        status: task.status,
         collections: task.parentIds,
         created_at: task.createdDate,
         updated_at: task.updatedDate,

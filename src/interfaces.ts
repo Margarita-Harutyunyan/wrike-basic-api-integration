@@ -2,7 +2,8 @@ export interface WrikeTask {
     id: string;
     title: string;
     accountId: string;
-    importance: string;
+    status: string;
+    responsibleIds: string[];
     parentIds: string[];
     createdDate: string;
     updatedDate: string;
@@ -12,7 +13,7 @@ export interface WrikeTask {
 export interface ResultTask {
     id: string;
     name: string;
-    assignee: string;
+    assignees: string[];
     status: string;
     collections: string[];
     created_at: string;
