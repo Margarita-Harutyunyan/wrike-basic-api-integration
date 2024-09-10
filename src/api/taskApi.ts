@@ -7,7 +7,7 @@ export const fetchTasksByProjectId = async (token: string, projectId: string): P
             'Authorization': `Bearer ${token}`
         },
         params: {
-            fields: 'responsibleIds,parentIds'
+            fields: JSON.stringify(["responsibleIds", "parentIds"])
         }
     });
     return response.data.data;

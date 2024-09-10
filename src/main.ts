@@ -1,39 +1,49 @@
-// src/main.ts
-import axios from 'axios';
-import fs from 'fs';
 import { config } from 'dotenv';
-import { WrikeTask, TaskResult } from './interfaces';
+import fs from 'fs';
+import { fetchProjects } from './api/projectApi';
+import { fetchTasksByProjectId } from './api/taskApi';
+import { WrikeProject, WrikeTask, ResultTask, ResultProject } from './interfaces';
 import { wrikeConverter } from './converter/WrikeConverter';
 
-config();
+config(); 
 
-const fetchAndConvertTasks = async (): Promise<void> => {
+const main = async () => {
     const token = process.env.WRIKE_API_TOKEN;
-    const url = 'https://www.wrike.com/api/v4/tasks?fields=["parentIds"]';
+    if (!token) {
+        throw new Error('WRIKE_API_TOKEN is not defined');
+    }
 
     try {
-        const response = await axios.get<{ data: WrikeTask[] }>(url, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
+        // 1. Fetch all projects
+        const projects: WrikeProject[] = await fetchProjects(token);
 
-        const tasks: TaskResult[] = response.data.data.map(task => wrikeConverter(task));
-        const data = JSON.stringify(tasks, null, 2);
+        // 2. For each project, fetch the tasks and convert them
+        const resultProjects: ResultProject[] = await Promise.all(projects.map(async (project) => {
+            // Fetch tasks for the current project
+            const tasks: WrikeTask[] = await fetchTasksByProjectId(token, project.id);
 
-        fs.writeFile('tasks.json', data, (err) => {
+            // Convert WrikeTask to ResultTask
+            const resultTasks: ResultTask[] = tasks.map(wrikeConverter);
+
+            // Return ResultProject for this project
+            return {
+                id: project.id,
+                tasks: resultTasks
+            };
+        }));
+
+        // 3. Write the resultProjects to a file
+        fs.writeFile('tasks.json', JSON.stringify(resultProjects, null, 2), (err) => {
             if (err) {
-                console.error('Error writing to file', err);
+                console.error('Error writing to file:', err);
             } else {
                 console.log('Successfully wrote to file');
             }
         });
+
     } catch (error) {
-        console.error('There was an error with the axios request:', error);
+        console.error('Error occurred:', error);
     }
 };
 
-
-fetchAndConvertTasks();
-
+main();
