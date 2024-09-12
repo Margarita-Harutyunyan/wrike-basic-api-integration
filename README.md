@@ -4,8 +4,9 @@ This project is a simple Node.js application that fetches all tasks from Wrike f
 
 ## Prerequisites
 - Node.js (version 20.x or higher)
+- TypeScript (v4.x or higher)
 - npm (Node Package Manager)
-- A Wrike API token
+- A Wrike API token (See how to generate a token in the 3rd section)
 
 ## Installation
 1. **Clone the Repository:**
@@ -41,11 +42,18 @@ This project is a simple Node.js application that fetches all tasks from Wrike f
     ```
     WRIKE_API_TOKEN=your_wrike_api_token
     ```
-    
+
+## Compiling TypeScript
+- **To compile the TypeScript files into JavaScript, run:**
+
+    ```
+    npx tsc
+    ```
+
 ## Running the Application:
 1. **Run the Application:**
     ```
-    node main.js
+    node dist/main.js
     ```
 2. **Output:**
 - Check the results in a newly generated file, `tasks.json`.
