@@ -44,7 +44,7 @@ This project is a simple Node.js application that fetches all tasks from Wrike f
     ```
 
 ## Compiling TypeScript
-- **To compile the TypeScript files into JavaScript, run:**
+1. **To compile the TypeScript files into JavaScript, run:**
 
     ```
     npx tsc
