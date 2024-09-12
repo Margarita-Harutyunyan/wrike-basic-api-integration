@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import fs from 'fs';
+import util from 'util';
 import { fetchProjects } from './api/projectApi';
 import { fetchTasksByProjectId } from './api/taskApi';
 import { WrikeProject, WrikeTask, ResultTask, ResultProject } from './interfaces';
@@ -27,13 +28,10 @@ const main = async () => {
             };
         }));
 
-        fs.writeFile('tasks.json', JSON.stringify(resultProjects, null, 2), (err) => {
-            if (err) {
-                console.error('Error writing to file:', err);
-            } else {
-                console.log('Successfully wrote to file');
-            }
-        });
+        const writeFilePromise = util.promisify(fs.writeFile);
+
+        await writeFilePromise('tasks.json', JSON.stringify(resultProjects, null, 2));
+        console.log('Successfully wrote to file');
 
     } catch (error) {
         console.error('Error occurred:', error);
