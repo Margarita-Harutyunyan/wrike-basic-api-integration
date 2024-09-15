@@ -7,7 +7,6 @@ import { writeFilePromise } from './fileUtils';
 
 config(); 
 
-
 async function main(): Promise<void> {
     const token = process.env.WRIKE_API_TOKEN;
     if (!token) {
