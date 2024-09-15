@@ -1,8 +1,8 @@
 import { apiClient } from './apiClient';
 import { WrikeTask } from '../interfaces';
 
-export const fetchTasksByProjectId = async (token: string, projectId: string): Promise<WrikeTask[]> => {
-    const response = await apiClient.get<{ data: WrikeTask[] }>(`/folders/${projectId}/tasks`, {
+export const fetchTasks = async (token: string): Promise<WrikeTask[]> => {
+    const response = await apiClient.get<{ data: WrikeTask[] }>(`/tasks`, {
         headers: {
             'Authorization': `Bearer ${token}`
         },
