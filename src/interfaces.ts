@@ -8,7 +8,7 @@ export interface WrikeTask {
     createdDate: string;
     updatedDate: string;
     permalink: string;
-};
+}
 
 export interface ResultTask {
     id: string;
@@ -19,17 +19,17 @@ export interface ResultTask {
     created_at: string;
     updated_at: string;
     ticket_url: string;
-};
+}
 
 export interface TaskConverter {
     (task: WrikeTask): ResultTask;
-};
+}
 
 export interface WrikeProject {
     id: string;
-};
+}
 
 export interface ResultProject {
     id: string;
     tasks: ResultTask[];
-};
+}

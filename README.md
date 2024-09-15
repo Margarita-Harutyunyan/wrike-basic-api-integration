@@ -43,17 +43,14 @@ This project is a simple Node.js application that fetches all tasks from Wrike f
     WRIKE_API_TOKEN=your_wrike_api_token
     ```
 
-## Compiling TypeScript
-1. **To compile the TypeScript files into JavaScript, run:**
-
-    ```
-    npx tsc
-    ```
 
 ## Running the Application:
-1. **Run the Application:**
+1. **Build the project:**
     ```
-    node dist/main.js
+    npm run build
     ```
-2. **Output:**
+2. **Run the project:**
+    ```
+    npm run start
+    ```
 - Check the results in a newly generated file, `tasks.json`.
